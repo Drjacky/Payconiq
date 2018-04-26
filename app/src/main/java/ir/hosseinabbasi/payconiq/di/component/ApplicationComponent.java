@@ -15,8 +15,8 @@ import ir.hosseinabbasi.payconiq.di.module.ApplicationModule;
  * Created by Dr.jacky on 2018/04/26.
  */
 @Singleton
-@Component(modules = {ApplicationModule.class})
-public interface ApplicationComponent {
+@Component(modules = {ApplicationModule.class, DataComponent.class})
+public interface ApplicationComponent extends DataComponent{
     void inject(MyApplication app);
 
     @ApplicationContext
