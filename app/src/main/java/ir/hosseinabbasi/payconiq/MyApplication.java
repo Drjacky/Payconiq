@@ -3,6 +3,8 @@ package ir.hosseinabbasi.payconiq;
 import android.content.Context;
 import android.support.multidex.MultiDexApplication;
 
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 import ir.hosseinabbasi.payconiq.di.component.ApplicationComponent;
 import ir.hosseinabbasi.payconiq.di.component.DaggerApplicationComponent;
 import ir.hosseinabbasi.payconiq.di.module.ApplicationModule;
@@ -17,6 +19,8 @@ public class MyApplication extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        initComponents();
+        setUpRealm();
     }
 
     public static MyApplication get(Context context) {
@@ -28,5 +32,14 @@ public class MyApplication extends MultiDexApplication {
                 .applicationModule(new ApplicationModule(this))
                 .build();
         mApplicationComponent.inject(this);
+    }
+
+    private void setUpRealm(){
+        Realm.init(this);
+        RealmConfiguration realmConfiguration = new RealmConfiguration
+                .Builder()
+                .deleteRealmIfMigrationNeeded()
+                .build();
+        Realm.setDefaultConfiguration(realmConfiguration);
     }
 }

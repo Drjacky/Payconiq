@@ -3,6 +3,7 @@ package ir.hosseinabbasi.payconiq.di.component;
 import javax.inject.Singleton;
 
 import dagger.Component;
+import dagger.Module;
 
 /**
  * Created by Dr.jacky on 2018/04/26.
