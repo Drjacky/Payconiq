@@ -8,7 +8,8 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 import ir.hosseinabbasi.payconiq.MyApplication;
-import ir.hosseinabbasi.payconiq.data.RealmManager;
+import ir.hosseinabbasi.payconiq.data.DataManager;
+import ir.hosseinabbasi.payconiq.data.db.RealmManager;
 import ir.hosseinabbasi.payconiq.di.ApplicationContext;
 import ir.hosseinabbasi.payconiq.di.module.ApplicationModule;
 import ir.hosseinabbasi.payconiq.di.module.DataModule;
@@ -27,6 +28,8 @@ public interface ApplicationComponent extends DataComponent{
     Resources exposeResources();
 
     Application exposeApplication();
+
+    DataManager getDataManager();
 
     RealmManager exposeRealmManager();
 }

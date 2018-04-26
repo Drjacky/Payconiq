@@ -8,6 +8,8 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import ir.hosseinabbasi.payconiq.data.AppDataManager;
+import ir.hosseinabbasi.payconiq.data.DataManager;
 import ir.hosseinabbasi.payconiq.di.ApplicationContext;
 
 /**
@@ -36,5 +38,11 @@ public class ApplicationModule {
     @Singleton
     Resources provideAppResources() {
         return mApplication.getResources();
+    }
+
+    @Provides
+    @Singleton
+    DataManager provideDataManager(AppDataManager appDataManager) {
+        return appDataManager;
     }
 }

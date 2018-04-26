@@ -1,4 +1,4 @@
-package ir.hosseinabbasi.payconiq.data;
+package ir.hosseinabbasi.payconiq.data.db;
 
 import io.realm.Realm;
 

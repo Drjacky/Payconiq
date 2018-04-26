@@ -4,7 +4,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import ir.hosseinabbasi.payconiq.data.RealmManager;
+import ir.hosseinabbasi.payconiq.data.db.RealmManager;
 
 /**
  * Created by Dr.jacky on 2018/04/26.
