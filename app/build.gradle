@@ -1,32 +1,134 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'realm-android'
 
 android {
-    compileSdkVersion 27
+    dataBinding {
+        enabled = true
+    }
+    compileSdkVersion 26
     defaultConfig {
+        vectorDrawables.useSupportLibrary = true
         applicationId "ir.hosseinabbasi.payconiq"
         minSdkVersion 19
-        targetSdkVersion 27
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            buildConfigField("String", "BASE_URL", "\"https://api.github.com/users/JakeWharton/repos\"")
+        }
+
+        debug {
+            minifyEnabled false
+            shrinkResources false
+            debuggable true
+            applicationIdSuffix ".debug"
+            versionNameSuffix "-DEBUG"
+
+            buildConfigField("String", "BASE_URL", "\"https://api.github.com/users/JakeWharton/repos\"")
+            signingConfig android.signingConfigs.debug
+        }
+
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
+        }
+
+        sourceSets {
+            main {
+                java.srcDirs += 'src/main/kotlin'
+            }
         }
     }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    // Android Support libs
+    [
+            'design',
+            'support-v4',
+            'appcompat-v7',
+            'recyclerview-v7',
+            'cardview-v7',
+            'support-annotations'
+    ].each {
+        implementation "com.android.support:${it}:${supportVersion}"
+    }
+    // database
+    kapt 'dk.ilios:realmfieldnameshelper:1.1.1'
+    // network
+    implementation "com.squareup.retrofit2:retrofit:${retrofit2Version}"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:${retrofit2Version}"
+    implementation "com.squareup.retrofit2:converter-gson:${retrofit2Version}"
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    // parser
+    implementation 'com.google.code.gson:gson:2.8.2'
+    // dependency injection
+    implementation 'javax.inject:javax.inject:1'
+    implementation "com.google.dagger:dagger:${daggerVersion}"
+    kapt "com.google.dagger:dagger-compiler:${daggerVersion}"
+    compileOnly 'javax.annotation:jsr250-api:1.0'
+    compileOnly 'org.glassfish:javax.annotation:10.0-b28'
+    // reactive
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.9'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
+    // logger
+    implementation 'com.jakewharton.timber:timber:4.5.1'
+    // ui
+    implementation "com.squareup.picasso:picasso:${picassoVersion}"
+    implementation "com.jakewharton:butterknife:${butterknifeVersion}"
+    kapt "com.jakewharton:butterknife-compiler:${butterknifeVersion}"
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+
+    //other
+    implementation 'com.android.support:multidex:1.0.3'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation "org.jetbrains.anko:anko:$anko_version"
+    kapt "com.android.databinding:compiler:$android_plugin_version"
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+}
+
+task customClean(type: Delete) {
+    delete rootProject.buildDir
+}
+clean.dependsOn customClean
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+        apiVersion = '1.1'
+        languageVersion = '1.1'
+    }
+}
+
+buildscript {
+    ext.android_plugin_version = '3.1.1'
+    ext.kotlin_version = '1.2.31'
+    ext.anko_version = '0.10.4'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
+    }
 }
