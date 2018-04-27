@@ -4,6 +4,8 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import ir.hosseinabbasi.payconiq.data.db.DbService;
+import ir.hosseinabbasi.payconiq.data.db.IDbService;
 import ir.hosseinabbasi.payconiq.data.db.RealmManager;
 
 /**
@@ -13,8 +15,13 @@ import ir.hosseinabbasi.payconiq.data.db.RealmManager;
 public class DataModule {
 
     @Provides
+    IDbService provideIDbService(DbService dbService){
+        return dbService;
+    }
+
+    @Provides
     @Singleton
-    RealmManager realmManager(){
+    RealmManager provideRealmManager(){
         return new RealmManager();
     }
 }
