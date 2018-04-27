@@ -2,10 +2,14 @@ package ir.hosseinabbasi.payconiq.data;
 
 import android.content.Context;
 
+import java.util.Map;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import io.reactivex.Observable;
 import ir.hosseinabbasi.payconiq.data.db.IDbService;
+import ir.hosseinabbasi.payconiq.data.db.model.Response;
 import ir.hosseinabbasi.payconiq.data.network.IApiService;
 import ir.hosseinabbasi.payconiq.di.ApplicationContext;
 
@@ -27,5 +31,10 @@ public class AppDataManager implements DataManager {
         mContext = context;
         mIApiService = IApiService;
         mDbService = dbService;
+    }
+
+    @Override
+    public Observable<Response> getResponse(Map<String, String> params) {
+        return mIApiService.getResponse(params);
     }
 }
