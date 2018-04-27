@@ -6,7 +6,7 @@ import android.net.ConnectivityManager
 /**
  * Created by Dr.jacky on 2018/04/27.
  */
-class NetworkUtils constructor(){
+class NetworkUtils {
 
     companion object {
         fun isNetworkConnected(context: Context): Boolean {
