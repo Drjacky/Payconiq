@@ -13,7 +13,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * Created by Dr.jacky on 2018/04/26.
  */
-@Singleton
 @Module
 public class NetModule {
 

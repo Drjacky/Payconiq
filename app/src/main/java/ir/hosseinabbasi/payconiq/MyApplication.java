@@ -23,6 +23,10 @@ public class MyApplication extends MultiDexApplication {
         setUpRealm();
     }
 
+    public ApplicationComponent getApplicationComponent() {
+        return mApplicationComponent;
+    }
+
     public static MyApplication get(Context context) {
         return (MyApplication) context.getApplicationContext();
     }
