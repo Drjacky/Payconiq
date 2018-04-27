@@ -6,6 +6,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import ir.hosseinabbasi.payconiq.data.db.IDbService;
+import ir.hosseinabbasi.payconiq.data.network.IApiService;
 import ir.hosseinabbasi.payconiq.di.ApplicationContext;
 
 /**
@@ -16,12 +17,15 @@ public class AppDataManager implements DataManager {
     private static final String TAG = "AppDataManager";
 
     private final Context mContext;
+    private final IApiService mIApiService;
     private final IDbService mDbService;
 
     @Inject
     public AppDataManager(@ApplicationContext Context context,
+                          IApiService IApiService,
                           IDbService dbService) {
         mContext = context;
+        mIApiService = IApiService;
         mDbService = dbService;
     }
 }
