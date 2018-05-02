@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
+import ir.hosseinabbasi.payconiq.R;
 import ir.hosseinabbasi.payconiq.data.DataManager;
 import ir.hosseinabbasi.payconiq.data.db.model.Response;
 import ir.hosseinabbasi.payconiq.ui.base.BasePresenter;
@@ -43,6 +44,7 @@ public class MainActivityPresenter<V extends IMainActivityView> extends BasePres
         disposables.add(getDataManager().getResponse(params)
                 .compose(threadTransformer.applySchedulers())
                 .subscribe(response -> {
+                    getDataManager().saveResponses(response);
                     getBaseView().hideLoading();
                     getBaseView().setIsLoading(false);
                     getBaseView().loadResponseList(response);
@@ -52,5 +54,23 @@ public class MainActivityPresenter<V extends IMainActivityView> extends BasePres
                     getBaseView().onError(throwable.getMessage());
                     Log.wtf(TAG, throwable.getMessage() + "");
                 }));
+    }
+
+    @Override
+    public void getLocalResponse() {
+        getBaseView().showLoading();
+        getBaseView().setIsLoading(true);
+        List<Response> responseList = getDataManager().loadResponses();
+
+        if (responseList.size() > 0) {
+            getBaseView().hideLoading();
+            getBaseView().setIsLoading(false);
+            getBaseView().loadResponseList(responseList);
+            getBaseView().onError(R.string.no_internet_connection_but_offline_data);
+        } else {
+            getBaseView().hideLoading();
+            getBaseView().setIsLoading(false);
+            getBaseView().onError(R.string.no_internet_connection_no_offline_data);
+        }
     }
 }

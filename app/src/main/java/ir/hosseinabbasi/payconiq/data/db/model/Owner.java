@@ -3,8 +3,10 @@ package ir.hosseinabbasi.payconiq.data.db.model;
 import javax.annotation.Generated;
 import com.google.gson.annotations.SerializedName;
 
+import io.realm.RealmObject;
+
 @Generated("com.robohorse.robopojogenerator")
-public class Owner{
+public class Owner extends RealmObject {
 
 	@SerializedName("gists_url")
 	private String gistsUrl;

@@ -10,4 +10,5 @@ import ir.hosseinabbasi.payconiq.ui.base.IBasePresenter;
  */
 public interface IMainActivityPresenter<V extends IMainActivityView> extends IBasePresenter<V> {
     void getResponse(Map<String, String> params);
+    void getLocalResponse();
 }

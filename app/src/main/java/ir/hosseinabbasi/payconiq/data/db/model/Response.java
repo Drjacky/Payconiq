@@ -3,8 +3,11 @@ package ir.hosseinabbasi.payconiq.data.db.model;
 import javax.annotation.Generated;
 import com.google.gson.annotations.SerializedName;
 
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
 @Generated("com.robohorse.robopojogenerator")
-public class Response{
+public class Response extends RealmObject {
 
 	@SerializedName("stargazers_count")
 	private int stargazersCount;
@@ -36,6 +39,7 @@ public class Response{
 	@SerializedName("svn_url")
 	private String svnUrl;
 
+	@PrimaryKey
 	@SerializedName("id")
 	private int id;
 
@@ -58,7 +62,7 @@ public class Response{
 	private String sshUrl;
 
 	@SerializedName("license")
-	private Object license;
+	private License license;
 
 	@SerializedName("full_name")
 	private String fullName;
@@ -184,7 +188,7 @@ public class Response{
 	private String contentsUrl;
 
 	@SerializedName("mirror_url")
-	private Object mirrorUrl;
+	private String mirrorUrl;
 
 	@SerializedName("milestones_url")
 	private String milestonesUrl;
@@ -355,11 +359,11 @@ public class Response{
 		return sshUrl;
 	}
 
-	public void setLicense(Object license){
+	public void setLicense(License license){
 		this.license = license;
 	}
 
-	public Object getLicense(){
+	public License getLicense(){
 		return license;
 	}
 
@@ -691,11 +695,11 @@ public class Response{
 		return contentsUrl;
 	}
 
-	public void setMirrorUrl(Object mirrorUrl){
+	public void setMirrorUrl(String mirrorUrl){
 		this.mirrorUrl = mirrorUrl;
 	}
 
-	public Object getMirrorUrl(){
+	public String getMirrorUrl(){
 		return mirrorUrl;
 	}
 

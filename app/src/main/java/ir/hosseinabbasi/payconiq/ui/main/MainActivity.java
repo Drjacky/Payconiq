@@ -50,6 +50,7 @@ public class MainActivity extends BaseActivity implements IMainActivityView {
     private int mPageSize = 15;
     private int mTotal = 100;
     private List<Response> mResponseList = new ArrayList<>();
+    private boolean isOfflineMode = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -75,18 +76,26 @@ public class MainActivity extends BaseActivity implements IMainActivityView {
         adapter = new ResponseAdapter(mContext, this);
         mRcyResponse.setAdapter(adapter);
 
-        if(isNetworkConnected())
+        if (isNetworkConnected()) {
+            isOfflineMode = false;
             getResponseList();
-        else
-            Toast.makeText(mContext, R.string.no_internet_connection, Toast.LENGTH_LONG).show();
+        }
+        else {
+            isOfflineMode =  true;
+            getLocalResponse();
+        }
     }
 
     public void getResponseList() {
-        Map<String, String> params = new HashMap<String, String>();
-        params.put("page", mCurrentPage+"");
-        params.put("per_page", mPageSize+"");
+        Map<String, String> params = new HashMap<>();
+        params.put("page", mCurrentPage + "");
+        params.put("per_page", mPageSize + "");
         mPresenter.getResponse(params);
         mCurrentPage++;
+    }
+
+    private void getLocalResponse() {
+        mPresenter.getLocalResponse();
     }
 
     @Override
@@ -115,7 +124,10 @@ public class MainActivity extends BaseActivity implements IMainActivityView {
 
                 if (!isRecyclerViewLoading()) {
                     if (((mVisibleItemCount + mFirstVisibleItemPosition) >= mTotalItemCount) && mBottomReached && (mTotalItemCount < mTotal)) {
-                        getResponseList();
+                        if (isNetworkConnected() && !isOfflineMode)
+                            getResponseList();
+                        else if(isNetworkConnected() && isOfflineMode) onError(R.string.internet_connection_after_offline_data);
+                        else onError(R.string.no_internet_connection);
                     }
                 }
             }

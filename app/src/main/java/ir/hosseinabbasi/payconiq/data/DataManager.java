@@ -14,4 +14,10 @@ import ir.hosseinabbasi.payconiq.data.network.IApiService;
 public interface DataManager extends IDbService, IApiService {
     @Override
     Observable<List<Response>> getResponse(Map<String, String> params);
+
+    @Override
+    List<Response> loadResponses();
+
+    @Override
+    void saveResponses(List<Response> responseList);
 }

@@ -36,7 +36,16 @@ public class AppDataManager implements DataManager {
 
     @Override
     public Observable<List<Response>> getResponse(Map<String, String> params) {
-        Observable<List<Response>> res = mIApiService.getResponse(params);
-        return res;
+        return mIApiService.getResponse(params);
+    }
+
+    @Override
+    public List<Response> loadResponses() {
+        return mDbService.loadResponses();
+    }
+
+    @Override
+    public void saveResponses(List<Response> responseList) {
+        mDbService.saveResponses(responseList);
     }
 }
