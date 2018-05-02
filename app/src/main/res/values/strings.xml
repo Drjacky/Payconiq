@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Payconiq</string>
     <string name="error_general">Error!</string>
+    <string name="no_internet_connection">No Internet Connection!</string>
 </resources>

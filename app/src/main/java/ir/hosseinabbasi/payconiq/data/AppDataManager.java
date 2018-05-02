@@ -2,6 +2,7 @@ package ir.hosseinabbasi.payconiq.data;
 
 import android.content.Context;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -34,7 +35,8 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Observable<Response> getResponse(Map<String, String> params) {
-        return mIApiService.getResponse(params);
+    public Observable<List<Response>> getResponse(Map<String, String> params) {
+        Observable<List<Response>> res = mIApiService.getResponse(params);
+        return res;
     }
 }

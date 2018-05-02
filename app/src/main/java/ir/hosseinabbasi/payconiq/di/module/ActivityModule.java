@@ -7,6 +7,10 @@ import dagger.Module;
 import dagger.Provides;
 import io.reactivex.disposables.CompositeDisposable;
 import ir.hosseinabbasi.payconiq.di.ActivityContext;
+import ir.hosseinabbasi.payconiq.di.PerActivity;
+import ir.hosseinabbasi.payconiq.ui.main.IMainActivityPresenter;
+import ir.hosseinabbasi.payconiq.ui.main.IMainActivityView;
+import ir.hosseinabbasi.payconiq.ui.main.MainActivityPresenter;
 
 /**
  * Created by Dr.jacky on 2018/04/26.
@@ -34,6 +38,13 @@ public class ActivityModule {
     @Provides
     CompositeDisposable provideCompositeDisposable() {
         return new CompositeDisposable();
+    }
+
+    @Provides
+    @PerActivity
+    IMainActivityPresenter<IMainActivityView> provideMainActivityPresenter(MainActivityPresenter<IMainActivityView>
+                                                                                   presenter) {
+        return presenter;
     }
 
 }

@@ -8,12 +8,12 @@ android {
     dataBinding {
         enabled = true
     }
-    compileSdkVersion 26
+    compileSdkVersion 27
     defaultConfig {
         vectorDrawables.useSupportLibrary = true
         applicationId "ir.hosseinabbasi.payconiq"
         minSdkVersion 19
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -24,7 +24,7 @@ android {
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
-            buildConfigField("String", "BASE_URL", "\"https://api.github.com/users/JakeWharton/repos\"")
+            buildConfigField("String", "BASE_URL", "\"https://api.github.com/users/JakeWharton/\"")
         }
 
         debug {
@@ -34,7 +34,7 @@ android {
             applicationIdSuffix ".debug"
             versionNameSuffix "-DEBUG"
 
-            buildConfigField("String", "BASE_URL", "\"https://api.github.com/users/JakeWharton/repos\"")
+            buildConfigField("String", "BASE_URL", "\"https://api.github.com/users/JakeWharton/\"")
             signingConfig android.signingConfigs.debug
         }
 
@@ -81,7 +81,7 @@ dependencies {
     compileOnly 'javax.annotation:jsr250-api:1.0'
     compileOnly 'org.glassfish:javax.annotation:10.0-b28'
     // reactive
-    implementation 'io.reactivex.rxjava2:rxjava:2.1.9'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.13'
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
     // logger
     implementation 'com.jakewharton.timber:timber:4.5.1'

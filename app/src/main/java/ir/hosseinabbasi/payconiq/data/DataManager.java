@@ -1,5 +1,6 @@
 package ir.hosseinabbasi.payconiq.data;
 
+import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
@@ -12,5 +13,5 @@ import ir.hosseinabbasi.payconiq.data.network.IApiService;
  */
 public interface DataManager extends IDbService, IApiService {
     @Override
-    Observable<Response> getResponse(Map<String, String> params);
+    Observable<List<Response>> getResponse(Map<String, String> params);
 }
