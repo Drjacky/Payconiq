@@ -3,6 +3,7 @@ package ir.hosseinabbasi.payconiq;
 import android.content.Context;
 import android.util.Log;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -53,6 +54,8 @@ public class ApiServiceUnitTest {
 
     @Test
     public void getResponseTest() {
-        appDataManager.getResponse(params);
+        List<Response> results;
+        results = appDataManager.getResponse(params).blockingFirst();
+        Assert.assertEquals(15, results.size());
     }
 }
