@@ -7,7 +7,7 @@ import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 
 @Generated("com.robohorse.robopojogenerator")
-class Response : RealmObject() {
+open class Response : RealmObject() {
 
     @SerializedName("stargazers_count")
     var stargazersCount: Int = 0

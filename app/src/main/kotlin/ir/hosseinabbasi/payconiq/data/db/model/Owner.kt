@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 import io.realm.RealmObject
 
 @Generated("com.robohorse.robopojogenerator")
-class Owner : RealmObject() {
+open class Owner : RealmObject() {
 
     @SerializedName("gists_url")
     var gistsUrl: String? = null
