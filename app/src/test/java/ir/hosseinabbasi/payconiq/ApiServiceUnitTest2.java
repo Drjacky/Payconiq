@@ -25,8 +25,8 @@ public class ApiServiceUnitTest2 {
         params.put("page", "1");
         params.put("per_page", "15");
 
-        /*TestComponent component = DaggerTestComponent.builder().myModule(new TestModule()).build();
-        component.inject(this);*/
+        TestComponent component = DaggerTestComponent.builder().myModule(new TestModule()).build();
+        component.inject(this);
     }
 
     @Inject
