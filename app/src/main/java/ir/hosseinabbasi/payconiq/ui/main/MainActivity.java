@@ -141,6 +141,11 @@ public class MainActivity extends BaseActivity implements IMainActivityView {
         this.mIsRecyclerViewLoading = isLoading;
     }
 
+    @Override
+    public void showDetail(String id) {
+        Toast.makeText(mContext, id, Toast.LENGTH_SHORT).show();
+    }
+
     public boolean isRecyclerViewLoading() {
         return mIsRecyclerViewLoading;
     }

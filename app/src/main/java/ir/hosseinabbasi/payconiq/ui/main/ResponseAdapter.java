@@ -76,7 +76,7 @@ public class ResponseAdapter extends RecyclerView.Adapter<ResponseAdapter.DataHo
         @Override
         public void onClick(View view) {
             Response sc = mResponseItems.get(getAdapterPosition());
-            //mListener.getDetail(sc.getNumber());
+            mListener.showDetail(sc.getId()+"");
         }
 
     }

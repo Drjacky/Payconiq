@@ -13,4 +13,6 @@ public interface IMainActivityView extends IBaseView {
     void loadResponseList(List<Response> responseList);
 
     void setIsLoading(Boolean isLoading);
+
+    void showDetail(String id);
 }
