@@ -5,6 +5,8 @@ import com.google.gson.annotations.SerializedName
 
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
+import com.google.gson.Gson
+
 
 @Generated("com.robohorse.robopojogenerator")
 open class Response : RealmObject() {
@@ -222,6 +224,12 @@ open class Response : RealmObject() {
 
     @SerializedName("forks_count")
     var forksCount: Int = 0
+
+    companion object {
+        fun fromJson(s: String): Response {
+            return Gson().fromJson<Response>(s, Response::class.java)
+        }
+    }
 
     override fun toString(): String {
         return "Response{" +
